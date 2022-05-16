@@ -1,12 +1,17 @@
-#include<bits/stdc++.h>
-using namespace std;
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /*
- a salesman has to decide in which day it had been record breaking sale 
+ Q a salesman has to decide in which day it had been record breaking sale 
  in such a way day that sale should be maximum before the all the days and one day after the that sale 
 
  i,e, a[i]>max(a[i-1],a[i-2],...a[0]) and a[i]>a[i+1]
 */
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#include<bits/stdc++.h>
+using namespace std;
+
+
 int main(){
     int n ;
     cout<<"enter value of n :";
@@ -15,7 +20,7 @@ int main(){
     int a[n+1];
     cout<<"\nEnter array : ";
     for(int i=0 ; i<n; i++){cin>>a[i];}
-   a[n]=-1; // to check if last element is record breaking
+    a[n]=-1; // to check if last element is record breaking
     int mx =-1;
     int ans=0;
     if (n ==1)
@@ -34,3 +39,13 @@ int main(){
 
         
 }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//output format
+/*
+enter value of n :6
+
+Enter array : 3 4 5 6 4 7
+record breaking day is :4 with sales value : 6
+record breaking day is :6 with sales value : 7
+*/
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
