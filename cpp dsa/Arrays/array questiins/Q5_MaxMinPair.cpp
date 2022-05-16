@@ -1,0 +1,56 @@
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Q : find the maximum and minimum of given array 
+/*
+Expected Time Complexity: O(N)
+Expected Auxiliary Space: O(1)
+
+Constraints:
+1 <= N <= 105
+1 <= Ai <=1012
+*/
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// { Driver Code Starts
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+pair<long long, long long> getMinMax(long long a[], int n) ;
+
+int main() {
+    int t;
+    cin >> t; // we use single testcase so use t =1 
+    while (t--) {
+        int n;
+        cin >> n;
+        ll a[n];
+        for (int i = 0; i < n; i++) cin >> a[i];
+
+        pair<ll, ll> pp = getMinMax(a, n);
+
+        cout << pp.first << " " << pp.second << endl;
+    }
+    return 0;
+}// } Driver Code Ends
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// main logic 
+pair<long long, long long> getMinMax(long long a[], int n) {
+    long long mx =LONG_MIN , mn=LONG_MAX;
+    for(int i =0 ; i<n ; i++){
+        mx = max(a[i],mx);
+        mn = min(a[i],mn);
+    }
+    return make_pair(mn ,mx);
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//output format 
+/*
+input
+1
+6
+1 2 3 4 5 900000000
+output 
+1 90000000
+*/
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
