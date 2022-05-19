@@ -62,7 +62,7 @@ int Stack_ll::pop(Stack_ll **head){
 
 int Stack_ll::peek(Stack_ll *head){
     if (head->next==NULL) {
-        cout<<"list is empty"<<endl;
+        cout<<"stack is empty"<<endl;
         return -1;
     }
     int x = head->data;
@@ -70,7 +70,7 @@ int Stack_ll::peek(Stack_ll *head){
 }
 ////////////////////////////////////  5. Display  /////////////////////////////////////////////////////////////////////////////////////////////////////
 void Stack_ll::display(Stack_ll *head){
-cout << "the linked list is : ";
+cout << "the stack is : ";
     while (head->next != NULL)
     {
         cout << head->data << " "; // ll is just ptr to head and
@@ -94,9 +94,9 @@ bool Stack_ll::isempty(Stack_ll *head){
 int main(){
     
     int n;
-    cout << "enter ll size :";
+    cout << "enter stack size :";
     cin >> n;
-    cout << "enter data elements : ";
+    cout << "enter stack data elements : ";
     int data_array[n];
     Stack_ll s ,*head;
     head = &s;
@@ -118,10 +118,10 @@ int main(){
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // output format 
 /*
-enter ll size :5
-enter data elements : 1 2 3 4 5
-the linked list is : 5 4 3 2 1 
-after pop operation the linked list is : 4 3 2 1 
+enter stack size :5
+enter stack data elements : 1 2 3 4 5
+the stack is : 5 4 3 2 1 
+after pop operation the stack is : 4 3 2 1 
 peek value is :4
 is stack empty : 0
 */
