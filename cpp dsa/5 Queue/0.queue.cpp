@@ -2,41 +2,32 @@
 /*
 ****************  Queue  DATA STRUCTURE ******************************
 
-- STACK is linear data structture
+- Queue is linear data structture
 - based on memory allocation it can be classified as ;
-    - 1. static stack .............. (stack using  array)
-    - 2. dynamic stack ..............(stack using linked list) 
+    - 1. static queue .............. (queue using  array)
+    - 2. dynamic queue ..............(queue using linked list) 
 
--  FILO or LIFO .... 
-   first in last out =  element entering first will leave stack at the last 
-   last in fast out = element entering last will leave stack at first position
+-  LILO or FIFO .... 
+   first in first out =  element entering first will leave queue at the first 
+   last in last out = element entering last will leave queue at last position
    
-   |__|--
-        |
-        |
-        insert from top , remove from top, 
-   |---------| 
+   |__|-
+        insert from rear
+   |---------| <---rear
    |---------|
    |---------|
    |---------|
-   |---------|<-- top = 0
-   |____2____| <-- bottom is closed
+   |---------|<-- front // remove from front;
+  
 
-
-   - basic functions of stack :
+   - basic functions of queue :
         1. push() -- insert element at top
         2. pop()   -- delete element at location top
-        3. isempty() -- check stack is empty or not
-        4. peek()/top()  -- return element at top of stack
-        5. display() --display the stack.
+        3. isempty() -- check queue is empty or not
+        4. peek()/top()  -- return element at top of queue
+        5. display() --display the queue.
 
--applications of stack 
-     1. reverse the string
-     2. undo function
-     3. recurssion/ function call
-     4. balance of {} paranthesis
-     5. dfs
-     6. tower of hanoi 
-     7.infix to postfix 
+-applications of queue 
+     
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-s
+*/
