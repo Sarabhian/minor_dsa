@@ -32,17 +32,17 @@ public:
 
     queue(){ front = rear = -1;} // default constructor initialising stack with top =-1
 
-    void push(int x);
-    int pop();
+    void enqueue(int x);
+    int dequeue();
     int peek();
     bool isempty();
     bool isfull();
     void display();
 };
 
-////////////////////////////////////////  2. push()  ///////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////  2. enqueue()  ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-void queue::push(int x){
+void queue::enqueue(int x){
     if(rear == MAX -1){
         cout<<"overflow condition : queue is full"<<endl;
         return;
@@ -57,9 +57,9 @@ void queue::push(int x){
     }
 }
 
-////////////////////////////////////////   3.pop()    ////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////   3.dequeue()    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-int queue::pop(){
+int queue::dequeue(){
     if(front == -1&&rear ==-1){
         cout<<"underflow condition : queue is empty";
         return -1;
@@ -128,12 +128,12 @@ int main(){
     cin>>n;
    
     cout<<"enter elements in queue";
-    for(int i=0 ; i<n;i++){ cin>>x; s.push(x); }
+    for(int i=0 ; i<n;i++){ cin>>x; s.enqueue(x); }
     
     cout<<"the queue is : ";
     s.display();
-    s.pop();
-    cout<<"the queue after pop is : ";
+    s.dequeue();
+    cout<<"the queue after dequeue is : ";
     s.display();
     cout<<"the element at top is :"<<s.peek()<<endl;
     cout<<"is queue full :"<<s.isfull()<<endl;
@@ -144,11 +144,11 @@ int main(){
 //output format
 /*
 is queue empty :1
-enter queue size :10
-enter elements in queue1 2 3 4 5 6 7 8 9 0
-the queue is : 1 2 3 4 5 6 7 8 9 0 
-the queue after pop is : 2 3 4 5 6 7 8 9 0 
+enter queue size :4
+enter elements in queue1 2 3 4
+the queue is : 1 2 3 4 
+the queue after dequeue is : 2 3 4 
 the element at top is :2
-is queue full :1
+is queue full :0
 */
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
