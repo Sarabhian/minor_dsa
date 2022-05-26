@@ -64,33 +64,46 @@ int queue::pop(){
         cout<<"underflow condition : queue is empty";
         return -1;
     }
-    int x = a[top--]; //x = a[top] ; top --;
-    return x;
+    else if(front == rear){
+        int x = a[front];
+        front = rear = -1;
+        // if both are equal means queue is having only one element , if we remove it , queue will become nill;
+        // so reassign front and rear to -1 and let the garbage value be there 
+        return x;
+    }
+    else{
+        int x = a[front];
+        front++;
+        return x;
+    }
+    return -1;  // condition for removing attribute parser error : not keeping return type null to avoid any conflict
 }
 ///////////////////////////////////////   4. peek()   ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 int queue::peek(){
-     if(top == -1){
+     if(front == -1&& rear ==-1){
         cout<<"underflow condition : queue is empty";
         return -1;
     }
-    int x = a[top]; // the only difference in pop and peek is , pop makes the top value as garbage and decrease size of stack 
+    int x = a[front]; // the only difference in pop and peek is , pop makes the top value as garbage and decrease size of stack 
                     // where peek return only top value and disturb the stack size;
     return x;
 }
 ///////////////////////////////////////  5. Display  /////////////////////////////////////////////////////////////////////////////////////////////////////
 void queue::display(){
-    int i = top;
-    while(i!=-1){
+    int i = front;
+    
+    if(front ==-1 && rear ==-1){cout<<" empty"<<endl; return;}
+    while(i<=rear){
         cout<<a[i]<<" ";
-        i--;
+        i++;
     }
     cout<<endl;
 }
 ///////////////////////////////////////  6. isempty() ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 bool queue::isempty(){
-    if(top == -1)
+    if(front == -1 && rear ==-1)
     return true;
     else 
     return false;
@@ -99,7 +112,7 @@ bool queue::isempty(){
 //////////////////////////////////////   7. isfull() ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 bool queue::isfull(){
-    if(top == MAX-1)
+    if(rear == MAX-1)
     return true;
     else 
     return false;
@@ -107,7 +120,7 @@ bool queue::isfull(){
 
 int main(){
     queue s;
-    cout<<"is squeueempty :"<<s.isempty()<<endl;
+    cout<<"is queue empty :"<<s.isempty()<<endl;
 
     cout<<"enter queue size :";
 
@@ -123,8 +136,19 @@ int main(){
     cout<<"the queue after pop is : ";
     s.display();
     cout<<"the element at top is :"<<s.peek()<<endl;
-
-
+    cout<<"is queue full :"<<s.isfull()<<endl;
 
    return 0;
 }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//output format
+/*
+is queue empty :1
+enter queue size :10
+enter elements in queue1 2 3 4 5 6 7 8 9 0
+the queue is : 1 2 3 4 5 6 7 8 9 0 
+the queue after pop is : 2 3 4 5 6 7 8 9 0 
+the element at top is :2
+is queue full :1
+*/
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
