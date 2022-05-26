@@ -110,13 +110,13 @@ int main(){
     cout << "enter queue size :";
     cin >> n;
     cout << "enter queue data elements : ";
-    int data_array[n];
+    int d;
     queue q ;
   
     for (int i = 0; i < n; i++)
     {
-        cin >> data_array[i];
-        q.nq(data_array[i]);
+        cin >> d;
+        q.nq(d);
     }
     
     q.display();
