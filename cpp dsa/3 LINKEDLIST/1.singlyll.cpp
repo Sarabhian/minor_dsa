@@ -194,47 +194,47 @@ SinglyNode *reverse_ll(SinglyNode *HEAD){
 ////////////////////////// 6. count the ll ////////////////////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////// Driver function ////////////////////////////////////////////////////////////////////////////////////////////////
-int main()
-{
-    int n;
-    cout << "enter ll size :";
-    cin >> n;
-    cout << "enter data elements : ";
-    int data_array[n];
-    for (int i = 0; i < n; i++)
-    {
-        cin >> data_array[i];
-    }
+//  int main()
+// {
+//     int n;
+//     cout << "enter ll size :";
+//     cin >> n;
+//     cout << "enter data elements : ";
+//     int data_array[n];
+//     for (int i = 0; i < n; i++)
+//     {
+//         cin >> data_array[i];
+//     }
 
-    // create a singly linked list
+//     // create a singly linked list
 
-    SinglyNode *s;
-    s = create_nNodes(n, data_array);
+//     SinglyNode *s;
+//     s = create_nNodes(n, data_array);
 
-    Display_ll(s);
+//     Display_ll(s);
 
-    insert_at_beg(&s, 7);
-    cout << "\nafter inserting node at beginning " << endl;
-    Display_ll(s);
+//     insert_at_beg(&s, 7);
+//     cout << "\nafter inserting node at beginning " << endl;
+//     Display_ll(s);
 
-    insert_at_end(&s, 8);
-    cout << "\nafter inserting node at end " << endl;
-    Display_ll(s);
+//     insert_at_end(&s, 8);
+//     cout << "\nafter inserting node at end " << endl;
+//     Display_ll(s);
 
-    insert_after_location(&s, 3, 9);
-    Display_ll(s);
-    cout << "\nafter deleting node at begining " << endl;
-    Del_at_beg(&s);
-    Display_ll(s);
-    cout << "\nafter deleting node at end " << endl;
-    del_at_end(&s);
-    Display_ll(s);
-    cout << "\nafter deleting note at location "<< 5 << endl;
-    del_at_loc(&s,5);
-    Display_ll(s);
-    cout <<"after reversing ";
-    SinglyNode *rs;
-    rs =reverse_ll(s);
-    Display_ll(rs);
-    return 0;
-}
+//     insert_after_location(&s, 3, 9);
+//     Display_ll(s);
+//     cout << "\nafter deleting node at begining " << endl;
+//     Del_at_beg(&s);
+//     Display_ll(s);
+//     cout << "\nafter deleting node at end " << endl;
+//     del_at_end(&s);
+//     Display_ll(s);
+//     cout << "\nafter deleting note at location "<< 5 << endl;
+//     del_at_loc(&s,5);
+//     Display_ll(s);
+//     cout <<"after reversing ";
+//     SinglyNode *rs;
+//     rs =reverse_ll(s);
+//     Display_ll(rs);
+//     return 0;
+// }
