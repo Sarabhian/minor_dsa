@@ -16,6 +16,16 @@ void printArray(int arr[], int n)
         cout << arr[i] << " ";
 }
 
+// Right shift of array elements by 1 element
+void righshift(int arr[], int n)
+{
+    int temp;
+    temp = arr[n-1];
+    for(int i =n-2 ; i>=0; i--){
+        arr[i+1] = arr[i];
+    }
+    arr[0]= temp;
+}
 // Left shift of array elements by 1 element
 int left_shift_arr(int arr[] , int n)
 {
