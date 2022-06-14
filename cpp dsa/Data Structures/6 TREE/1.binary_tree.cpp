@@ -5,6 +5,7 @@
 #include <iostream>
 #include <queue>  //for levelorder traversal
 #include <vector> //for levelorder traversal
+#include<map>
 
 using namespace std;
 /*
@@ -200,8 +201,8 @@ vector<int> levelorder(node *root)
 .                  -->                  16     20
 .                                      /  \
 .                  -->               44    50
-.                                    \
-.                   -->              50
+.                                  / 
+.                   -->          50
 
 here  18 , 15, 40 , 16, 44 and50 are parts of left view of tree
 
@@ -267,7 +268,65 @@ vector<int> rightview(node *root)
     return ans;
 }
 /*===============================================  4.3. top view ==========================================================
+
+
+ here we will traverse tree  in vertical line level order traversal, 
+
+consider tree root as 0th line, then lines in left will  increase by -1 and lines  right to root node will increase by +1 ,
+
+.       line 0
+   .     .
+   .    10    .
+   . /   .  \ .
+  20     .   30
+   .     .    .
+line -1      line 1
+ 
+we need :
+
+one queue to store pair( node data , line )
+one map to store line number and node→ data
+ans vector to store the data of  nodes in top view
+
+Algo : 
+
+1.we will traverse through each node, first go for root  it's line is 0,add { root data , line } to queue;
+2.check untill queue is not empty :
+.       a. take front of queue , store node val and line value of front to node and line variables , now pop the front from queue,
+.       b. if map of the line does not exist  add node→data  to map[line] 
+.           ( in this way we will be only adding only first top most nodes data present in that particular line)
+.       c. now  check for left and right nodes , if they are not null  push data of left and right into q with thier line info. 
+.           ( for left node line will decrease by 1 and for right it will increase by 1)
+3.after adding all top nodes data to the map, push that data to answer vector.
+4.return the ans vector
+ 
 */
+
+vector<int> topView(node *root)
+    {
+        vector<int> ans;
+        if( root ==NULL) return ans;
+       
+        map<int ,int> mp;
+        queue<pair<node* ,int>> q;
+        q.push({root ,0});
+        
+        while(!q.empty()){
+            auto  it = q.front();
+            q.pop();
+            node* Node = it.first;
+            int line =it.second;
+            
+            if(mp.find(line)==mp.end()) mp[line] = Node->data;
+            if(Node->left !=NULL) q.push({Node->left , line -1});
+            if(Node->right!=NULL) q.push({Node->right,line+1});
+            
+        }
+        for(auto i:mp) ans.push_back(i.second);
+        
+        return ans;
+    }
+
 
 ///////////////////////////////////////////////// 5. Height of tree /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -328,6 +387,8 @@ int main()
     printvector(leftview(root));
     cout << "right view of tree :" ;
     printvector(rightview(root));
+    cout<<"top view of tree :";
+    printvector(topView(root));
     return 0;
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -342,9 +403,13 @@ level :2 right node of 40:-1
 level :1 right node of 15:50
 level :2 left node of 50:16
 level :3 left node of 16:44
-level :4 left node of 44:-1
+level :4 left node of 44:50
+level :5 left node of 50:-1
+level :5 right node of 50:-1
 level :4 right node of 44:-1
-level :3 right node of 16:-1
+level :3 right node of 16:50
+level :4 left node of 50:-1
+level :4 right node of 50:-1
 level :2 right node of 50:20
 level :3 left node of 20:-1
 level :3 right node of 20:-1
@@ -355,12 +420,13 @@ level :2 right node of 100:-1
 level :1 right node of 30:40
 level :2 left node of 40:-1
 level :2 right node of 40:-1
-preorder traversal :18 15 40 50 16 44 20 30 100 40 
-inorder traversal :40 15 44 16 50 20 18 100 30 40 
-postorder traversal :40 44 16 20 50 15 100 40 30 18 
-levelorder traversal :18 15 30 40 50 100 40 16 20 44 
-height of a tree is :5
-Diameter of a tree is :7
-left view of tree :18 15 40 16 44 
-right view of tree :18 30 40 20 44 
+preorder traversal :18 15 40 50 16 44 50 50 20 30 100 40 
+inorder traversal :40 15 50 44 16 50 50 20 18 100 30 40 
+postorder traversal :40 50 44 50 16 20 50 15 100 40 30 18 
+levelorder traversal :18 15 30 40 50 100 40 16 20 44 50 50 
+height of a tree is :6
+Diameter of a tree is :8
+left view of tree :18 15 40 16 44 50 
+right view of tree :18 30 40 20 50 50 
+top view of tree :50 40 15 18 30 40 
 */
