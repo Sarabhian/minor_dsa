@@ -184,23 +184,23 @@ vector<int> levelorder(node *root)
     }
     return ans;
 }
-////////////////////////////////////////// 4. views of tree ///////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////// 4. views of tree ////////////////////////////////////////////////////////////////////////////////////////////
 // let's go back to EGD :)
 /*
-========================================== 4.1. left view of tree ======================================================================
+========================================== 4.1. left view of tree ==================================================================================
 1. left view of tree :
 .                   when we insert projection of light on left side of tree
 .                   then the node which is having direct contact  with light will be part of left view of tree
 
   1.                 --->                    18
 .                                         /       \
-.                  -->                  15         30
-.                                     /  \        /  \
-.                  -->               40    50    100   40
-.                                         /   \
-.                  -->                  16     20
-.                                      /  \
-.                  -->               44    50
+.                  -->                   15         30
+.                                     /     \       /  \
+.                  -->               40      50   100   40    //considering verticle line 50 and 100 collide at line 0
+.                                          /    \
+.                  -->                   16      20          //  30 and 20 collide at line 1
+.                                      /   \
+.                  -->               44      50
 .                                  / 
 .                   -->          50
 
@@ -237,7 +237,7 @@ vector<int> leftview(node *root)
     return ans;
 }
 
-/*================================================ 4.2. right view ====================================================
+/*================================================ 4.2. right view ========================================================================================
 
 same as left view only traveller will travel to right node first , and iff level of left is more than right then
 only data of left will be added to ans vector
@@ -267,7 +267,7 @@ vector<int> rightview(node *root)
     right_traveller(ans, root, 0);
     return ans;
 }
-/*===============================================  4.3. top view ==========================================================
+/*===============================================  4.3. top view =======================================================================================
 
 
  here we will traverse tree  in vertical line level order traversal, 
@@ -326,8 +326,32 @@ vector<int> topView(node *root)
         
         return ans;
     }
+//===============================================  4.4. bottom view ======================================================================================
 
-
+vector<int> BottomView(node *root)
+    {
+        vector<int> ans;
+        if( root ==NULL) return ans;
+       
+        map<int ,int> mp;
+        queue<pair<node* ,int>> q;
+        q.push({root ,0});
+        
+        while(!q.empty()){
+            auto  it = q.front();
+            q.pop();
+            node* Node = it.first;
+            int line =it.second;
+            
+            mp[line] = Node->data;
+            if(Node->left !=NULL) q.push({Node->left , line -1});
+            if(Node->right!=NULL) q.push({Node->right,line+1});
+            
+        }
+        for(auto i:mp) ans.push_back(i.second);
+        
+        return ans;
+    }
 ///////////////////////////////////////////////// 5. Height of tree /////////////////////////////////////////////////////////////////////////////////////////
 
 int height(node *root)
@@ -350,7 +374,7 @@ int diameter(node *root)
     return max(max(diameter(root->left), diameter(root->right)), currdiameter);
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void printvector(vector<int> a)
 {
@@ -389,9 +413,11 @@ int main()
     printvector(rightview(root));
     cout<<"top view of tree :";
     printvector(topView(root));
+    cout<<"bottom view of tree :";
+    printvector(BottomView(root));
     return 0;
 }
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // output format
 /*
 enter -1 to exit else enter data value of new node
@@ -429,4 +455,6 @@ Diameter of a tree is :8
 left view of tree :18 15 40 16 44 50 
 right view of tree :18 30 40 20 50 50 
 top view of tree :50 40 15 18 30 40 
+bottom view of tree :50 44 16 50 20 40 
 */
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
