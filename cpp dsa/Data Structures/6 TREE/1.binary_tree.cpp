@@ -5,7 +5,7 @@
 #include <iostream>
 #include <queue>  //for levelorder traversal
 #include <vector> //for levelorder traversal
-#include<map>
+#include <map>
 
 using namespace std;
 /*
@@ -80,6 +80,16 @@ node *create(int lvl = -1)
 
         return temp;
     }
+}
+
+// creates single node
+node *createNode(int val)
+{
+    node *newNode = new (node);
+    newNode->data = val;
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return newNode;
 }
 ///////////////////////////////////////// 2 DFS Traversal ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -201,7 +211,7 @@ vector<int> levelorder(node *root)
 .                  -->                   16      20          //  30 and 20 collide at line 1
 .                                      /   \
 .                  -->               44      50
-.                                  / 
+.                                  /
 .                   -->          50
 
 here  18 , 15, 40 , 16, 44 and50 are parts of left view of tree
@@ -224,7 +234,7 @@ void left_traveller(vector<int> &ans, node *root, int level = 0)
     }
 
     left_traveller(ans, root->left, level + 1);
-    
+
     // first traveller will go to left nodes and level will increase ,
     // so data of right nodes will not be added into ans vector unless the level is more than deepest left node
     left_traveller(ans, root->right, level + 1);
@@ -255,7 +265,7 @@ void right_traveller(vector<int> &ans, node *root, int level = 0)
     }
 
     right_traveller(ans, root->right, level + 1);
-    
+
     // first traveller will go to right nodes and level will increase ,
     // so data of left nodes will not be added into ans vector unless the level is more than deepest right node
     right_traveller(ans, root->left, level + 1);
@@ -270,7 +280,7 @@ vector<int> rightview(node *root)
 /*===============================================  4.3. top view =======================================================================================
 
 
- here we will traverse tree  in vertical line level order traversal, 
+ here we will traverse tree  in vertical line level order traversal,
 
 consider tree root as 0th line, then lines in left will  increase by -1 and lines  right to root node will increase by +1 ,
 
@@ -281,77 +291,101 @@ consider tree root as 0th line, then lines in left will  increase by -1 and line
   20     .   30
    .     .    .
 line -1      line 1
- 
+
 we need :
 
 one queue to store pair( node data , line )
 one map to store line number and node→ data
 ans vector to store the data of  nodes in top view
 
-Algo : 
+Algo :
 
 1.we will traverse through each node, first go for root  it's line is 0,add { root data , line } to queue;
 2.check untill queue is not empty :
 .       a. take front of queue , store node val and line value of front to node and line variables , now pop the front from queue,
-.       b. if map of the line does not exist  add node→data  to map[line] 
+.       b. if map of the line does not exist  add node→data  to map[line]
 .           ( in this way we will be only adding only first top most nodes data present in that particular line)
-.       c. now  check for left and right nodes , if they are not null  push data of left and right into q with thier line info. 
+.       c. now  check for left and right nodes , if they are not null  push data of left and right into q with thier line info.
 .           ( for left node line will decrease by 1 and for right it will increase by 1)
 3.after adding all top nodes data to the map, push that data to answer vector.
 4.return the ans vector
- 
+
 */
 
 vector<int> topView(node *root)
-    {
-        vector<int> ans;
-        if( root ==NULL) return ans;
-       
-        map<int ,int> mp;
-        queue<pair<node* ,int>> q;
-        q.push({root ,0});
-        
-        while(!q.empty()){
-            auto  it = q.front();
-            q.pop();
-            node* Node = it.first;
-            int line =it.second;
-            
-            if(mp.find(line)==mp.end()) mp[line] = Node->data;
-            if(Node->left !=NULL) q.push({Node->left , line -1});
-            if(Node->right!=NULL) q.push({Node->right,line+1});
-            
-        }
-        for(auto i:mp) ans.push_back(i.second);
-        
+{
+    vector<int> ans;
+    if (root == NULL)
         return ans;
+
+    map<int, int> mp;
+    queue<pair<node *, int>> q;
+    q.push({root, 0});
+
+    while (!q.empty())
+    {
+        auto it = q.front();
+        q.pop();
+        node *Node = it.first;
+        int line = it.second;
+
+        if (mp.find(line) == mp.end())
+            mp[line] = Node->data;
+        if (Node->left != NULL)
+            q.push({Node->left, line - 1});
+        if (Node->right != NULL)
+            q.push({Node->right, line + 1});
     }
+    for (auto i : mp)
+        ans.push_back(i.second);
+
+    return ans;
+}
 //===============================================  4.4. bottom view ======================================================================================
 
 vector<int> BottomView(node *root)
-    {
-        vector<int> ans;
-        if( root ==NULL) return ans;
-       
-        map<int ,int> mp;
-        queue<pair<node* ,int>> q;
-        q.push({root ,0});
-        
-        while(!q.empty()){
-            auto  it = q.front();
-            q.pop();
-            node* Node = it.first;
-            int line =it.second;
-            
-            mp[line] = Node->data;
-            if(Node->left !=NULL) q.push({Node->left , line -1});
-            if(Node->right!=NULL) q.push({Node->right,line+1});
-            
-        }
-        for(auto i:mp) ans.push_back(i.second);
-        
+{
+    vector<int> ans;
+    if (root == NULL)
         return ans;
+
+    map<int, int> mp;
+    queue<pair<node *, int>> q;
+    q.push({root, 0});
+
+    while (!q.empty())
+    {
+        auto it = q.front();
+        q.pop();
+        node *Node = it.first;
+        int line = it.second;
+
+        mp[line] = Node->data;
+        if (Node->left != NULL)
+            q.push({Node->left, line - 1});
+        if (Node->right != NULL)
+            q.push({Node->right, line + 1});
     }
+    for (auto i : mp)
+        ans.push_back(i.second);
+
+    return ans;
+}
+// ========================================= mirror view ===========================================================
+
+void mirrorify(node *root, node **mirror)
+{
+    if (root == NULL)
+    {
+        mirror = NULL;
+        return;
+    }
+
+    // Create new mirror node from original tree node
+    *mirror = createNode(root->data);
+    mirrorify(root->left, &((*mirror)->right));
+    mirrorify(root->right, &((*mirror)->left));
+}
 ///////////////////////////////////////////////// 5. Height of tree /////////////////////////////////////////////////////////////////////////////////////////
 
 int height(node *root)
@@ -382,7 +416,7 @@ void printvector(vector<int> a)
     {
         cout << a[i] << " ";
     }
-    cout<<endl;
+    cout << endl;
 }
 int main()
 {
@@ -407,54 +441,67 @@ int main()
     cout << "height of a tree is :" << height(root) << endl
          << "Diameter of a tree is :" << diameter(root);
     cout << endl;
-    cout << "left view of tree :" ;
+    cout << "left view of tree :";
     printvector(leftview(root));
-    cout << "right view of tree :" ;
+    cout << "right view of tree :";
     printvector(rightview(root));
-    cout<<"top view of tree :";
+    cout << "top view of tree :";
     printvector(topView(root));
-    cout<<"bottom view of tree :";
+    cout << "bottom view of tree :";
     printvector(BottomView(root));
+
+    node * mirror;
+    mirrorify(root ,&mirror);
+    cout << "mirror view of tree :";  //it will be reverse of original inorder 
+    inorder(mirror);
+    cout<<endl;
     return 0;
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // output format
 /*
 enter -1 to exit else enter data value of new node
-18
-level :0 left node of 18:15
-level :1 left node of 15:40
-level :2 left node of 40:-1
-level :2 right node of 40:-1
-level :1 right node of 15:50
-level :2 left node of 50:16
-level :3 left node of 16:44
-level :4 left node of 44:50
-level :5 left node of 50:-1
-level :5 right node of 50:-1
-level :4 right node of 44:-1
-level :3 right node of 16:50
-level :4 left node of 50:-1
-level :4 right node of 50:-1
-level :2 right node of 50:20
+50
+level :0 left node of 50:12
+level :1 left node of 12:13
+level :2 left node of 13:14
+level :3 left node of 14:-1
+level :3 right node of 14:-1
+level :2 right node of 13:40
+level :3 left node of 40:-1
+level :3 right node of 40:30
+level :4 left node of 30:-1
+level :4 right node of 30:-1
+level :1 right node of 12:14
+level :2 left node of 14:-1
+level :2 right node of 14:20
 level :3 left node of 20:-1
-level :3 right node of 20:-1
-level :0 right node of 18:30
-level :1 left node of 30:100
-level :2 left node of 100:-1
-level :2 right node of 100:-1
-level :1 right node of 30:40
-level :2 left node of 40:-1
-level :2 right node of 40:-1
-preorder traversal :18 15 40 50 16 44 50 50 20 30 100 40 
-inorder traversal :40 15 50 44 16 50 50 20 18 100 30 40 
-postorder traversal :40 50 44 50 16 20 50 15 100 40 30 18 
-levelorder traversal :18 15 30 40 50 100 40 16 20 44 50 50 
+level :3 right node of 20:21
+level :4 left node of 21:-1
+level :4 right node of 21:-1
+level :0 right node of 50:29
+level :1 left node of 29:-1
+level :1 right node of 29:30
+level :2 left node of 30:-1
+level :2 right node of 30:40
+level :3 left node of 40:122
+level :4 left node of 122:123
+level :5 left node of 123:-1
+level :5 right node of 123:-1
+level :4 right node of 122:14
+level :5 left node of 14:-1
+level :5 right node of 14:-1
+level :3 right node of 40:-1
+preorder traversal :50 12 13 14 40 30 14 20 21 29 30 40 122 123 14 
+inorder traversal :14 13 40 30 12 14 20 21 50 29 30 123 122 14 40 
+postorder traversal :14 30 40 13 21 20 14 12 123 14 122 40 30 29 50 
+levelorder traversal :50 12 29 13 14 30 14 40 20 40 30 21 122 123 14 
 height of a tree is :6
-Diameter of a tree is :8
-left view of tree :18 15 40 16 44 50 
-right view of tree :18 30 40 20 50 50 
-top view of tree :50 40 15 18 30 40 
-bottom view of tree :50 44 16 50 20 40 
+Diameter of a tree is :10
+left view of tree :50 12 13 14 30 123 
+right view of tree :50 29 30 40 122 14 
+top view of tree :14 13 12 50 29 30 40 
+bottom view of tree :14 13 40 30 123 122 14 
+mirror view of tree :40 14 122 123 30 29 50 21 20 14 12 30 40 13 14 
 */
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
