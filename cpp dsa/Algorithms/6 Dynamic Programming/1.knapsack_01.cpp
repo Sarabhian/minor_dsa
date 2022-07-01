@@ -14,10 +14,30 @@ using namespace std;
         
         
     }
+
+    int top_down (vector<vector<int>> &dp, int W,int wt[],int val[],int N){
+        for(int w=0;w<W+1;w++){
+            dp[0][w] = 0;
+        }
+        for(int n=0;n<N+1;n++){
+                dp[n][0]=0;
+        }
+        for(int n=1 ;n<=N;n++){
+            for(int w=1;w<=W;w++){
+                if(wt[n-1]<=w){
+                    dp[n][w] = max(val[n-1]+dp[n-1][w-wt[n-1]],dp[n-1][w]);
+                }
+                else dp[n][w]= dp[n-1][w];
+            }
+        }
+
+       return dp[N][W] ;
+    }
     int knapSack(int W, int wt[], int val[], int n) 
     { 
         vector<vector<int>>dp(n+1,vector<int>(W+1,-1));
-        return memoization(dp,W,wt,val,n);
+        // return memoization(dp,W,wt,val,n);
+        return top_down(dp,W,wt,val,n);
         
     }
 
