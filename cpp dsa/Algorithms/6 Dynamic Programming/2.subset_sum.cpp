@@ -14,8 +14,8 @@ bool subsetSum(int arr[],int n,int target,bool ans){
     cout<<"n: "<<n<<" target :"<<target<<" subsetsum :"<<ans<<endl;
     if(n==0 && target ==0) {ans = 1;return ans;}
     if(n==0) {ans= 0;return ans;}
-    if(target==0) return true;
-    if(arr[n-1]<target){
+    if(target==0) return true; 
+    if(arr[n-1]<=target){
         ans = subsetSum(arr,n-1,target-arr[n-1],ans) || subsetSum(arr,n-1,target,ans);
         return ans;
     }
