@@ -9,5 +9,7 @@ bool check_palindrome(string s){
 int main(){
    string S = "abcdcba",A = "aaaaaab";
    cout<<"is S palindrome :"<<check_palindrome(S)<<endl<<"is A palindrome :"<<check_palindrome(A)<<endl;
+   cout << "git check !";
    return 0;
+
 }
