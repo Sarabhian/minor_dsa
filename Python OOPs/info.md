@@ -2,7 +2,7 @@
 
 - In this repo I will be covering the basic stuff related to python oops concepts
 - some basic oops project applications in python 
-- python basics for solving leetcode problems (ome standard things..)
+- python basics for solving leetcode problems (some standard things..)
 - and many more insights..
 
 
