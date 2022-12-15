@@ -3,8 +3,8 @@
 
 This repo consists of 
 
- * 1.[Data Structures & Algorithms in C++](https://github.com/Sarabhian/minor_dsa/tree/master/cpp%20dsa): which consists of :
-   * **Algorithms** : 
+ * 1.[Data Structures & Algorithms in C++](https://github.com/Sarabhian/minor_dsa/tree/master/cpp%20dsa) ==> (cpp dsa):<br> inside which we have:
+   * [**Algorithms**](https://github.com/Sarabhian/minor_dsa/tree/master/cpp%20dsa/Algorithms) : 
       * Analysis of Algorithms 
       * Searching and Sorting 
       * Greedy Algorithms 
@@ -19,7 +19,7 @@ This repo consists of
       * Graph Algorithms 
       * Randomized Algorithms 
       * Branch and Bound
-    * **DATA STRUCTURES** :
+    * [**DATA STRUCTURES**](https://github.com/Sarabhian/minor_dsa/tree/master/cpp%20dsa/Data%20Structures) :
       * basic C++
       * Arrays
       * strings
